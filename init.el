@@ -6,9 +6,24 @@
 (set-fontset-font "fontset-default"
 'gb18030' ("Microsoft YaHei" . "unicode-bmp"));;Î¢ÈíÑÅºÚ
 ;;------------------------------------------------------
-;;org-mode auto-indent
+;;org-mode settings
 (setq org-startup-indented t)
 (setq truncate-lines nil)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (R . t)
+   (ruby . t)
+   (ditaa . t)
+   (dot . t)
+   (octave . t)
+   (sqlite . t)
+   (perl . t)
+   (C . t)
+   ))
 ;;---------------------------------------------------
 ;;set archvies
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
