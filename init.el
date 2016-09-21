@@ -5,17 +5,34 @@
 ;;;Set chinese fonts
 (set-fontset-font "fontset-default"
 'gb18030' ("Microsoft YaHei" . "unicode-bmp"));;微软雅黑
+(setq default-buffer-file-coding-system 'utf-8)
+(setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+(set-language-environment 'utf-8)
+;;(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+(setq locale-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(unless (eq system-type 'windows-nt)
+(set-selection-coding-system 'utf-8))
+(prefer-coding-system 'utf-8)
+
 ;;------------------------------------------------------
 ;;org-mode settings
 (setq org-startup-indented t)
 (setq truncate-lines nil)
 
+;;设置自动换行
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(
+   ;;(ipython . t)
+   ;;(ipython . t)
    (sh . t)
    (python . t)
    (R . t)
+   (org . t)
    (ruby . t)
    (ditaa . t)
    (dot . t)
@@ -25,6 +42,21 @@
    (C . t)
    ))
 ;;---------------------------------------------------
+;;w3m配置项（用于上网）
+;;(add-to-list 'load-path "D:/.emacs.d/emacs-w3m") ;;w3m所需要的lisp文件，所在路径
+(add-to-list 'exec-path "d:/emacs/bin/w3m") ;;指定w3m可执行程序，所在的执行路径
+(require 'w3m-load)
+(setq w3m-use-favicon nil)
+(setq w3m-command-arguments '("-cookie" "-F"))
+(setq w3m-use-cookies t)
+(setq w3m-home-page "http://www.baidu.com")
+;;-----------------------------------------
+;;elpy setting
+(package-initialize)
+(elpy-enable)
+(elpy-use-ipython)
+
+;;----------------------------------------------------------
 ;;set archvies
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
