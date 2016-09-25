@@ -20,6 +20,7 @@
 ;;org-mode settings
 (setq org-startup-indented t)
 (setq truncate-lines nil)
+(setq org-src-fontify-natively t) ;;代码块高亮
 
 ;;设置自动换行
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -50,6 +51,12 @@
 (setq w3m-command-arguments '("-cookie" "-F"))
 (setq w3m-use-cookies t)
 (setq w3m-home-page "http://www.baidu.com")
+;;-------------------------------------------------
+;;webkit
+(add-to-list 'load-path "D:/.emacs.d/elpa/webkit")
+;;(load "webkit")
+;;(require 'epc)
+;;(require 'webkit)
 ;;-----------------------------------------
 ;;elpy setting
 (package-initialize)
@@ -114,6 +121,12 @@
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
 
+;;------------------
+;;self config for ob-ipython 
+(require 'org)
+(require 'ob-ipython)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+;;-----------------------------------
 (require-package 'wgrep)
 (require-package 'project-local-variables)
 (require-package 'diminish)
